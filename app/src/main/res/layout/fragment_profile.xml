@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main.profile.ProfileFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:id="@+id/rlHeader"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivUserAvatar"
+            android:layout_width="45dp"
+            android:src="@mipmap/meo"
+            android:layout_marginStart="8dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tvChatsText"
+            android:text="Profile"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@+id/ivUserAvatar"
+            android:layout_alignBottom="@+id/ivUserAvatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Profile" />
+
+</RelativeLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    xmlns:context="http://schemas.android.com/tools">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivAvatar"
+        android:src="@mipmap/meo"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+    <ImageView
+        android:id="@+id/ivStatus"
+        android:src="@drawable/round"
+        android:layout_alignEnd="@+id/ivAvatar"
+        android:layout_alignBottom="@+id/ivAvatar"
+        android:layout_width="10dp"
+        android:layout_height="10dp" />
+
+    <TextView
+        android:id="@+id/tvUserName"
+        context:text="User Name"
+        android:textSize="18dp"
+        android:layout_toEndOf="@+id/ivAvatar"
+        android:layout_marginStart="10dp"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnMessage"
+        android:background="@mipmap/message"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="8dp"
+        android:layout_toStartOf="@id/btnMore"
+        android:layout_width="35dp"
+        android:layout_height="35dp" />
+
+    <Button
+        android:id="@+id/btnMore"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/ic_more_vert_black_24dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp" />
+
+</RelativeLayout>
