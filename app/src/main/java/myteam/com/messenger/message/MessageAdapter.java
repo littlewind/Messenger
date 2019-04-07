@@ -1,4 +1,4 @@
-package myteam.com.messenger.main.message;
+package myteam.com.messenger.message;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

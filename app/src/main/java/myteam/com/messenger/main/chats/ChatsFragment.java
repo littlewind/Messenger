@@ -1,4 +1,4 @@
-package myteam.com.messenger.chats;
+package myteam.com.messenger.main.chats;
 
 
 import android.os.Bundle;

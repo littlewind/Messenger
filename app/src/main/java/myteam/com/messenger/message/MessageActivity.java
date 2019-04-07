@@ -1,4 +1,4 @@
-package myteam.com.messenger.main.message;
+package myteam.com.messenger.message;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -27,7 +26,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import myteam.com.messenger.R;
 import myteam.com.messenger.model.Message;
 import myteam.com.messenger.model.Room;

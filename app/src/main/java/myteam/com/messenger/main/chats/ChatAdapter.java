@@ -1,4 +1,4 @@
-package myteam.com.messenger.chats;
+package myteam.com.messenger.main.chats;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +24,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import myteam.com.messenger.R;
-import myteam.com.messenger.main.message.MessageActivity;
+import myteam.com.messenger.message.MessageActivity;
 import myteam.com.messenger.model.Message;
 import myteam.com.messenger.model.Room;
 import myteam.com.messenger.model.RoomDetail;

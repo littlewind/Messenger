@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
 
-import myteam.com.messenger.chats.ChatsFragment;
+import myteam.com.messenger.main.chats.ChatsFragment;
 import myteam.com.messenger.main.people.PeopleFragment;
 import myteam.com.messenger.main.profile.ProfileFragment;
 

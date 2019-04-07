@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 
 import myteam.com.messenger.main.SectionsPagerAdapter;
-import myteam.com.messenger.chats.ChatsFragment;
+import myteam.com.messenger.main.chats.ChatsFragment;
 import myteam.com.messenger.main.people.PeopleFragment;
 import myteam.com.messenger.main.profile.ProfileFragment;
 

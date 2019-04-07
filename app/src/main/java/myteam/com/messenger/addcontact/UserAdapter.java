@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-import myteam.com.messenger.main.message.MessageActivity;
+import myteam.com.messenger.message.MessageActivity;
 import myteam.com.messenger.R;
 import myteam.com.messenger.model.Room;
 import myteam.com.messenger.model.User;
