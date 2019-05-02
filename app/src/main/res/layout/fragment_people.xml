@@ -37,9 +37,19 @@
             android:layout_width="33dp"
             android:layout_height="match_parent" />
     </RelativeLayout>
+
+    <EditText
+        android:id="@+id/etSearch"
+        android:drawableLeft="@mipmap/search"
+        android:hint="Enter User Name"
+        android:textSize="14dp"
+        android:layout_below="@+id/rlHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvContacts"
-        android:layout_below="@+id/rlHeader"
+        android:layout_below="@+id/etSearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

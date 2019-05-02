@@ -10,7 +10,7 @@
     <EditText
         android:id="@+id/etSearch"
         android:drawableLeft="@mipmap/search"
-        android:hint="Enter User Name or UID"
+        android:hint="Enter User Name"
         android:textSize="14dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="8dp"
     android:layout_height="wrap_content">
 
@@ -28,6 +28,17 @@
         android:id="@+id/tvSeen"
         android:visibility="gone"
         android:layout_below="@id/tvMessage"/>
+
+    <TextView
+        android:id="@+id/tvIsSeen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvMessage"
+        android:layout_alignEnd="@+id/tvMessage"
+        android:textSize="14dp"
+        tools:text="seen"
+        android:textStyle="italic"
+        android:visibility="visible" />
 
 
 </RelativeLayout>

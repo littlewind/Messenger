@@ -7,10 +7,14 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -27,11 +32,11 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import myteam.com.messenger.addcontact.AddContactActivity;
 import myteam.com.messenger.R;
+import myteam.com.messenger.addcontact.UserAdapter;
 import myteam.com.messenger.model.User;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
+
 public class PeopleFragment extends Fragment {
 
     private final static String TAG = PeopleFragment.class.getSimpleName();
@@ -41,10 +46,13 @@ public class PeopleFragment extends Fragment {
 
     RecyclerView mRecyclerView;
     PeopleAdapter mPeopleAdapter;
-    List<String> FriendsUID;
+//    List<String> FriendsUID;
     List<User> Friends;
+    List<User> searchUserList;
 
     Button btnAddContact;
+
+    EditText etSearch;
 
     public PeopleFragment() {
         // Required empty public constructor
@@ -99,8 +107,27 @@ public class PeopleFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         Friends = new ArrayList<>();
+        searchUserList = new ArrayList<>();
 
         readFriends();
+
+        etSearch = view.findViewById(R.id.etSearch);
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                searchUsers(charSequence.toString().toLowerCase());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         return view;
     }
@@ -108,27 +135,6 @@ public class PeopleFragment extends Fragment {
     private void readFriends() {
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         final DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("Friends").child(firebaseUser.getUid());
-//        final DatabaseReference friendReference = FirebaseDatabase.getInstance().getReference().child(firebaseUser.getUid()).child("Friends");
-
-//        friendReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                Friends.clear();
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    String newFriendUID = (String) snapshot.getValue();
-//
-//
-//                }
-//
-//                mPeopleAdapter = new PeopleAdapter(getContext(), Friends);
-//                mRecyclerView.setAdapter(mPeopleAdapter);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
 
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -153,6 +159,19 @@ public class PeopleFragment extends Fragment {
             }
         });
 
+
+    }
+
+    private void searchUsers(String s) {
+        searchUserList.clear();
+        for (User user : Friends) {
+            if (user.getSearch().contains(s)) {
+                searchUserList.add(user);
+            }
+
+        }
+        mPeopleAdapter = new PeopleAdapter(getContext(), searchUserList);
+        mRecyclerView.setAdapter(mPeopleAdapter);
 
     }
 
