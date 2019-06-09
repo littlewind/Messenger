@@ -1,6 +1,8 @@
 package myteam.com.messenger;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +10,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,14 +20,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText email, password;
     Button btn_login;
+    ProgressBar pbWaiting;
 
     FirebaseAuth auth;
+    FirebaseUser firebaseUser;
     TextView forgot_password, create_account;
+
+    CheckBox cbRememberMe;
+    SharedPreferences sp;
+    SharedPreferences.Editor spEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +48,22 @@ public class LoginActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.btn_login);
         create_account = findViewById(R.id.create_account);
         forgot_password = findViewById(R.id.forgot_password);
+        cbRememberMe = findViewById(R.id.cbRememberMe);
+        pbWaiting = findViewById(R.id.pbWaiting);
+        pbWaiting.setVisibility(View.GONE);
+
+        sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        spEditor = sp.edit();
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (sp.getBoolean("RememberMe", false)) {
+            if (firebaseUser != null){
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }
 
         create_account.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,28 +71,36 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
-//        forgot_password.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
-//            }
-//        });
+        forgot_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
+            }
+        });
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                btn_login.setEnabled(false);
                 String txt_email = email.getText().toString();
                 String txt_password = password.getText().toString();
 
                 if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)){
-                    Toast.makeText(LoginActivity.this, "All fileds are required", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "All fields are required", Toast.LENGTH_SHORT).show();
                 } else {
-
+                    pbWaiting.setVisibility(View.VISIBLE);
                     auth.signInWithEmailAndPassword(txt_email, txt_password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()){
+                                        if (cbRememberMe.isChecked()) {
+                                            spEditor.putBoolean("RememberMe", true);
+                                        } else {
+                                            spEditor.putBoolean("RememberMe", false);
+                                        }
+                                        spEditor.apply();
+
                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
@@ -73,6 +108,9 @@ public class LoginActivity extends AppCompatActivity {
                                     } else {
                                         Log.w("Login","Login Failed",task.getException());
                                         Toast.makeText(LoginActivity.this, "Authentication failed!", Toast.LENGTH_SHORT).show();
+                                        pbWaiting.setVisibility(View.GONE);
+                                        btn_login.setEnabled(true);
+
                                     }
                                 }
                             });

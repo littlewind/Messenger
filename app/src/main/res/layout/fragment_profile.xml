@@ -3,36 +3,98 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context=".main.profile.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
-        android:id="@+id/rlHeader"
-        android:layout_marginTop="8dp"
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvProfile"
         android:layout_width="match_parent"
-        android:layout_height="45dp">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ivUserAvatar"
-            android:layout_width="45dp"
-            android:src="@mipmap/meo"
-            android:layout_marginStart="8dp"
-            android:layout_height="match_parent" />
-        <TextView
-            android:id="@+id/tvChatsText"
-            android:text="Profile"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_marginStart="15dp"
-            android:layout_toEndOf="@+id/ivUserAvatar"
-            android:layout_alignBottom="@+id/ivUserAvatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
 
-    </RelativeLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Profile" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="8dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/profile_image"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:src="@mipmap/ic_launcher_round"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phung Tran"
+                android:layout_below="@id/profile_image"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:id="@+id/username"
+                android:textSize="18sp"
+                android:layout_marginBottom="20dp"/>
+
+
+            <LinearLayout
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal"
+                android:layout_below="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvTextID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ID:" />
+                <TextView
+                    android:id="@+id/tvUID"
+                    android:layout_marginStart="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_below="@+id/cvProfile"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginStart="10dp"
+                android:src="@mipmap/logout"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:layout_marginStart="15dp"
+                android:id="@+id/tvLogOut"
+                android:textSize="16dp"
+                android:text="Log Out"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

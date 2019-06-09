@@ -36,6 +36,14 @@
             android:layout_marginTop="10dp"
             android:hint="Password"/>
 
+        <CheckBox
+            android:id="@+id/cbRememberMe"
+            android:text="Remember me"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,10 +82,14 @@
                 android:id="@+id/forgot_password"
                 android:textColor="@color/colorPrimaryDark"/>
         </LinearLayout>
-
-
-
-
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pbWaiting"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="95dp"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

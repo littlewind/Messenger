@@ -23,7 +23,7 @@ import myteam.com.messenger.model.User;
 
 public class RegisterActivity extends AppCompatActivity {
     private final String TAG = "RegisterActivity";
-    EditText username, email, password;
+    EditText username, email, password, confirmPassword;
     Button btn_register;
 
     FirebaseAuth auth;
@@ -37,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
+        confirmPassword = findViewById(R.id.confirm_password);
         btn_register = findViewById(R.id.btn_register);
 
         auth = FirebaseAuth.getInstance();
@@ -47,12 +48,9 @@ public class RegisterActivity extends AppCompatActivity {
                 String txt_username = username.getText().toString();
                 String txt_email = email.getText().toString();
                 String txt_password = password.getText().toString();
+                String txt_confirmPassword = confirmPassword.getText().toString();
 
-                if (TextUtils.isEmpty(txt_username) || TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)){
-                    Toast.makeText(RegisterActivity.this, "All fields are required", Toast.LENGTH_SHORT).show();
-                } else if (txt_password.length() < 6 ){
-                    Toast.makeText(RegisterActivity.this, "password must be at least 6 characters", Toast.LENGTH_SHORT).show();
-                } else {
+                if (isValidInput(txt_username, txt_email, txt_password, txt_confirmPassword)) {
                     register(txt_username, txt_email, txt_password);
                 }
             }
@@ -99,5 +97,21 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private boolean isValidInput(String user, String email, String pass, String confirm) {
+        if (TextUtils.isEmpty(user) || TextUtils.isEmpty(email) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(confirm)) {
+            Toast.makeText(RegisterActivity.this, "All fields are required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!TextUtils.equals(pass, confirm)) {
+            Toast.makeText(RegisterActivity.this, "Password didn't match", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (pass.length() < 6) {
+            Toast.makeText(RegisterActivity.this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 }
